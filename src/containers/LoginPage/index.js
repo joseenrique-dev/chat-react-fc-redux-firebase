@@ -1,4 +1,8 @@
 import React from 'react'
+import Layout from '../../components/Layout'
+import Card from '../../components/Layout/UI/Card'
+import './style.css';
+
 
 /**
 * @author
@@ -7,7 +11,15 @@ import React from 'react'
 
 const LoginPage = (props) => {
   return(
-    <div>LoginPage</div>
+    <Layout>
+      <div className="loginContainer">
+        <Card>
+          <form>
+            login !!!
+          </form>
+        </Card>
+      </div>
+    </Layout>
    )
   }
 
