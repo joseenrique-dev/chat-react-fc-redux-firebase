@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../components/Layout'
-import Card from '../../components/Card'
 import './style.css';
-
+import Card from "../../components/UI/Card"
 
 /**
 * @author

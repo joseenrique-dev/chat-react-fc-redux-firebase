@@ -5,8 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './store';
+import firebase from 'firebase';
 
 window.store = store;
+const firebaseConfig = {
+  apiKey: "AIzaSyC_ANmFRBnlHukpMwHjH9BcAa2fW_f_bfQ",
+  authDomain: "chatreactfcredux.firebaseapp.com",
+  databaseURL: "https://chatreactfcredux-default-rtdb.firebaseio.com",
+  projectId: "chatreactfcredux",
+  storageBucket: "chatreactfcredux.appspot.com",
+  messagingSenderId: "168223813386",
+  appId: "1:168223813386:web:0574005d59d88d57c654f3",
+  measurementId: "G-KYPPQBN430"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+//firebase.analytics();
 
 ReactDOM.render(
     <Provider store={ store } >

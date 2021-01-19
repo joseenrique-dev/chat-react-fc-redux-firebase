@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Layout from '../../components/Layout';
-import Card from '../../components/Card';
+import Card from '../../components/UI/Card';
 import { signup } from '../../actions/index'
+import { useDispatch } from 'react-redux';
 import '../LoginPage/style.css';
 
 
@@ -19,12 +20,15 @@ const RegisterPage = (props) => {
 
   const onRegister = ( e )=>{
     e.preventDefault();
+    
     dispatch(
       signup(
-        firstName,
-        lastName,
-        email,
-        password)
+        { firstName,
+          lastName,
+          email,
+          password
+        }
+        )
       );
   }
   return(
