@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../../components/Layout'
 import Card from "../../components/UI/Card"
-import { signin } from '../../actions/auth.actions';
+import { signin, isLoggedInUser } from '../../actions/auth.actions';
 import './style.css';
 import { Redirect } from 'react-router';
 
@@ -18,6 +18,9 @@ const LoginPage = (props) => {
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
   
+  useEffect(() => {
+    dispatch(isLoggedInUser())
+  }, [])
   const userLogin = e =>{
     e.preventDefault();
 
@@ -37,7 +40,7 @@ const LoginPage = (props) => {
   }
 
   if( auth.authenticated ){
-    return <Redirect to={'/home'} />
+    return <Redirect to={'/'} />
   }
   return(
     <Layout>
