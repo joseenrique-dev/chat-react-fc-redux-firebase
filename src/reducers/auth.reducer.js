@@ -10,6 +10,8 @@ const initialState = {
 }
 
 export default (state = initialState, action) =>{
+    console.log('REDUCER-->', action);
+
     switch (action.type) {
         case `${authConstants.USER_LOGIN}_REQUEST`:
             return {

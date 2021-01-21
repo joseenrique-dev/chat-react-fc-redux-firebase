@@ -63,3 +63,39 @@ export const signup = (user) => {
 
 
 }
+
+export const signin = (user) =>{
+    console.log('ACTION login', user)
+    return async dispatch =>{
+        dispatch({
+            type: `${authConstants.USER_LOGIN}_REQUEST`
+        });
+
+        auth()
+            .signInWithEmailAndPassword(user.email, user.password)
+            .then(data =>{
+                console.log('LOGIN::', data);
+                const name = data.user.displayName.split(" ");
+                const firstName = name[0];
+                const lastName = name[1];
+
+                const loggedInUser = {
+                    firstName,
+                    lastName,
+                    uid: data.user.uid,
+                    email: user.email
+                }
+                localStorage.setItem('user', JSON.stringify(loggedInUser));
+                console.log('User logged in successfully...!');
+                dispatch({
+                    type: `${authConstants.USER_LOGIN}_SUCCESS`,
+                    payload: {user:loggedInUser}
+                })
+
+            })
+            .catch(error =>{
+                console.log('Error:', error);
+                
+            })
+    }
+}

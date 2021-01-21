@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import Layout from '../../components/Layout'
-import './style.css';
 import Card from "../../components/UI/Card"
+import { signin } from '../../actions/auth.actions';
+import './style.css';
+import { Redirect } from 'react-router';
 
 /**
 * @author
@@ -12,12 +15,35 @@ const LoginPage = (props) => {
 
   const [ email,  setEmail] = useState('');
   const [ password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth);
+  
+  const userLogin = e =>{
+    e.preventDefault();
 
+    // validations
+    if(email == "") {
+      console.log('Empty email');
+      return
+    }
+    if(password == "") {
+      console.log('Empty password');
+      return
+    }
+    
+    dispatch(
+      signin( {email, password} )
+    );
+  }
+
+  if( auth.authenticated ){
+    return <Redirect to={'/home'} />
+  }
   return(
     <Layout>
       <div className="loginContainer">
         <Card>
-          <form>
+          <form onSubmit={userLogin}>
             <input type="text" value={email} onChange={e => setEmail(e.target.value)}/>          
             <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>          
             <div>
