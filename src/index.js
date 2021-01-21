@@ -23,6 +23,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 //firebase.analytics();
 
+window.store = store;
 ReactDOM.render(
     <Provider store={ store } >
       <React.StrictMode>
