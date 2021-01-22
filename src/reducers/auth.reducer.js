@@ -13,6 +13,7 @@ export default (state = initialState, action) =>{
     console.log('REDUCER-->', action);
 
     switch (action.type) {
+        //Auth case
         case `${authConstants.USER_LOGIN}_REQUEST`:
             return {
                 ...state,
@@ -33,7 +34,19 @@ export default (state = initialState, action) =>{
                 authenticated:false,
                 error: action.payload.error
             }
-    
+        //LogOutCase
+        case `${authConstants.USER_LOGOUT}_REQUEST`:
+            return;
+        case `${authConstants.USER_LOGOUT}_SUCCESS`:
+            
+            return {
+                ...initialState
+            };
+        case `${authConstants.USER_LOGOUT}_FAILURE`:
+            return {
+                ...state,
+                error: action.payload.error
+            }
         default:{
             return state;
         }

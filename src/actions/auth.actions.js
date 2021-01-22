@@ -63,7 +63,6 @@ export const signup = (user) => {
 
 
 }
-
 export const signin = (user) =>{
     console.log('ACTION login', user)
     return async dispatch =>{
@@ -99,7 +98,6 @@ export const signin = (user) =>{
             })
     }
 }
-
 export const isLoggedInUser = () =>{
     return async dispatch =>{
         const user = localStorage.getItem('user') ? 
@@ -116,5 +114,30 @@ export const isLoggedInUser = () =>{
                 payload: {error: 'Login again please'}
             });
         }
+    }
+}
+
+export const logout = () =>{
+    return async dispatch =>{
+        dispatch({
+            type: `${authConstants.USER_LOGOUT}_REQUEST`
+        })
+
+        auth()
+            .signOut()
+            .then(()=>{
+                localStorage.clear();
+                dispatch({
+                    type: `${authConstants.USER_LOGOUT}_SUCCESS`
+                })
+            })
+            .catch(error=>{
+                console.log('ERROR::', error);
+                dispatch({
+                    type: `${authConstants.USER_LOGOUT}_FAILURE`,
+                    payload: {error}
+                })
+            })
+
     }
 }
