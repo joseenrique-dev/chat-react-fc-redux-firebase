@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { logout } from '../../actions/auth.actions'
 import './style.css'
@@ -12,6 +12,7 @@ import './style.css'
 
 const Header = (props) => {
   const auth = useSelector(state=> state.auth);
+  const dispatch = useDispatch();
   const logOut = () =>dispatch(logout())
   return(
     <header className="header">

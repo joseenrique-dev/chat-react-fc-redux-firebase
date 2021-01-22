@@ -74,7 +74,7 @@ export const signin = (user) =>{
             .signInWithEmailAndPassword(user.email, user.password)
             .then(data =>{
                 console.log('LOGIN::', data);
-                const name = data.user.displayName.split(" ");
+                const name = data.user.displayName?.split(" ");
                 const firstName = name[0];
                 const lastName = name[1];
 
@@ -118,6 +118,8 @@ export const isLoggedInUser = () =>{
 }
 
 export const logout = () =>{
+    console.log('LOGOUT ...')
+
     return async dispatch =>{
         dispatch({
             type: `${authConstants.USER_LOGOUT}_REQUEST`

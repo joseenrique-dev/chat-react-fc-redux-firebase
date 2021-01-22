@@ -36,7 +36,10 @@ export default (state = initialState, action) =>{
             }
         //LogOutCase
         case `${authConstants.USER_LOGOUT}_REQUEST`:
-            return;
+            
+            return {
+                ...state
+            }
         case `${authConstants.USER_LOGOUT}_SUCCESS`:
             
             return {
