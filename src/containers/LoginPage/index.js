@@ -46,7 +46,7 @@ const LoginPage = (props) => {
     <Layout>
       <div className="loginContainer">
         <Card>
-          <form onSubmit={userLogin}>
+          <form onSubmit={userLogin} autoComplete="on">
             <input type="text" value={email} onChange={e => setEmail(e.target.value)}/>          
             <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>          
             <div>

@@ -13,7 +13,7 @@ import './style.css'
 const Header = (props) => {
   const auth = useSelector(state=> state.auth);
   const dispatch = useDispatch();
-  const logOut = () =>dispatch(logout(auth.uid))
+  const logOut = () =>dispatch(logout(auth.uid));
   return(
     <header className="header">
         <div style={{display: 'flex'}}>

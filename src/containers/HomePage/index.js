@@ -13,11 +13,24 @@ const HomePage = (props) => {
     const dispatch = useDispatch();
     const auth = useSelector(state => state.auth);
     const user = useSelector(state => state.user);
-console.log('USERRRRR FROM SELECTOR-->', user.users.length)
-console.log('USERRRRR Auth-->', auth.uid)
+    let unsubscribe;
 
     useEffect(() => {
-        dispatch(getRealTimeUsers( auth.uid ));        
+        unsubscribe = dispatch(getRealTimeUsers( auth.uid ))
+        .then(unsubscribe => unsubscribe)
+        .catch(err => {
+            console.log('Error::', err);
+        });  
+    }, []);
+
+    useEffect(() => {
+        
+        return () => {
+            //cleanUp
+            unsubscribe
+            .then(f => f())
+            .catch(err =>console.log('Err:',err));
+        }
     }, [])
 
   return(
