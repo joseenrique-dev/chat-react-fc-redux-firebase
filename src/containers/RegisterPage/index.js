@@ -4,7 +4,7 @@ import Card from '../../components/UI/Card';
 import { signup } from '../../actions/index'
 import { useDispatch, useSelector } from 'react-redux';
 import '../LoginPage/style.css';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 
 /**
@@ -13,12 +13,13 @@ import { Redirect } from 'react-router';
 **/
 
 const RegisterPage = (props) => {
-  const [ firstName,  setFirstName] = useState('');
-  const [ lastName,  setLastName] = useState('');
-  const [ email,  setEmail] = useState('');
-  const [ password, setPassword] = useState('');
+  const [ firstName, setFirstName] = useState('');
+  const [ lastName, setLastName] = useState('');
+  const [ email, setEmail] = useState('');
+  const [ password, setPassword ] = useState('');
   const dispatch = useDispatch();
   const auth = useSelector(state => state.auth);
+
   const onRegister = ( e )=>{
     e.preventDefault();
     

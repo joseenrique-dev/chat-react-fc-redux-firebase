@@ -12,7 +12,8 @@ import './style.css';
 const HomePage = (props) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user);
-console.log('USERRRRR', user)
+console.log('USERRRRR FROM SELECTOR-->', user)
+
     useEffect(() => {
         dispatch(getRealTimeUsers());        
     }, [])
