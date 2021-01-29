@@ -11,11 +11,13 @@ import './style.css';
 
 const HomePage = (props) => {
     const dispatch = useDispatch();
+    const auth = useSelector(state => state.auth);
     const user = useSelector(state => state.user);
-console.log('USERRRRR FROM SELECTOR-->', user)
+console.log('USERRRRR FROM SELECTOR-->', user.users.length)
+console.log('USERRRRR Auth-->', auth.uid)
 
     useEffect(() => {
-        dispatch(getRealTimeUsers());        
+        dispatch(getRealTimeUsers( auth.uid ));        
     }, [])
 
   return(
@@ -23,9 +25,9 @@ console.log('USERRRRR FROM SELECTOR-->', user)
       <section className="container">
         <div className="listOfUsers">
         {
-            user.users?.length > 0 ?
+            user.users.length > 0 ?
                 user.users.map(user=>{
-                    <div className="displayName">
+                    return (<div className="displayName">
                         <div className="displayPic">
                             <img src="https://i.pinimg.com/originals/be/ac/96/beac96b8e13d2198fd4bb1d5ef56cdcf.jpg" alt="" />
                         </div>
@@ -33,7 +35,7 @@ console.log('USERRRRR FROM SELECTOR-->', user)
                             <span style={{fontWeight: 500}}>{user.firstName} {user.lastName}</span>
                             <span>{user.online ? 'online' : 'offline'}</span>
                         </div>
-                    </div>
+                    </div>)
                 }) : null
         }
                     

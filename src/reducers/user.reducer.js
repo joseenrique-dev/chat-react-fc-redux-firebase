@@ -17,8 +17,7 @@ export default (state = initialState, action) =>{
             return {
                 ...state,
                 users: action.payload.users
-            };
-        
+            };        
     
         default:{
             return {

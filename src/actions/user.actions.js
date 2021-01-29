@@ -1,8 +1,8 @@
 import { userConstants } from './constants'
 import { firestore } from 'firebase';
 
-export const getRealTimeUsers = () =>{
-
+export const getRealTimeUsers = ( uid ) =>{
+    
     return async dispatch =>{
         dispatch({
             type: `${userConstants.GET_REALTIME_USERS}_REQUEST`
@@ -14,9 +14,9 @@ export const getRealTimeUsers = () =>{
         .onSnapshot((querySnapshot) => {
             const users = [];
             querySnapshot.forEach(function(doc) {
-                // if(doc.data().uid != uid){
-                // }
-                users.push(doc.data());
+                if(doc.data().uid != uid){
+                    users.push(doc.data());
+                }
             });
             console.log('USERS-->',users);
 
