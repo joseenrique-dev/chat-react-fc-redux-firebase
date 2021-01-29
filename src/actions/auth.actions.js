@@ -117,7 +117,7 @@ export const isLoggedInUser = () =>{
     }
 }
 
-export const logout = () =>{
+export const logout = (uid) =>{
     console.log('LOGOUT ...')
 
     return async dispatch =>{
@@ -125,7 +125,14 @@ export const logout = () =>{
             type: `${authConstants.USER_LOGOUT}_REQUEST`
         })
 
-        auth()
+        const db = firestore();
+        db.collection('users')
+        .doc(uid)
+        .update({
+            isOnline: false
+        })
+        .then(() =>{
+            auth()
             .signOut()
             .then(()=>{
                 localStorage.clear();
@@ -140,6 +147,12 @@ export const logout = () =>{
                     payload: {error}
                 })
             })
+        })
+        .catch(err =>{
+            console.log('Error:', err);
+        })
+
+        
 
     }
 }
