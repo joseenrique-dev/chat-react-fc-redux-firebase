@@ -68,16 +68,23 @@ const HomePage = (props) => {
             }
             </div>
             <div className="messageSections">
-
+            {
+                chatStarted ?
                 <div style={{ textAlign: 'left' }}>
                     <p className="messageStyle" >Hello User</p>
-                </div>
+                </div> :
+                null
+            }
+            </div>
+            {
+                chatStarted ?
+                <div className="chatControls">
+                    <textarea />
+                    <button>Send</button>
+                </div> :
+                null
 
-            </div>
-            <div className="chatControls">
-                <textarea />
-                <button>Send</button>
-            </div>
+            }
         </div>
       </section>
     </Layout>
