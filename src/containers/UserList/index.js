@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './style.css';
 
 export default function UserList( props ) {
     const { user, onClick } = props;
@@ -11,7 +12,7 @@ export default function UserList( props ) {
             </div>
             <div style={{margin: '0 10px', display:'flex',flex:1, justifyContent:'space-between'}}>
                 <span style={{fontWeight: 500}}>{user.firstName} {user.lastName}</span>
-                <span>{user.isOnline ? 'online' : 'offline'}</span>
+                <span className={user.isOnline ? 'onlineStatus' : 'onlineStatus off'}></span>
             </div>
         </div>
     )
