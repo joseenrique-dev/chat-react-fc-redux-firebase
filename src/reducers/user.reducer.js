@@ -2,6 +2,7 @@ import { userConstants } from '../actions/constants';
 
 const initialState = {
     users: [],
+    conversations: []
 }
 
 export default (state = initialState, action) =>{
@@ -18,7 +19,11 @@ export default (state = initialState, action) =>{
                 ...state,
                 users: action.payload.users
             };        
-    
+        case userConstants.GET_REALTIME_MESSAGE:
+            return {
+                ...state,
+                conversations: action.payload.conversations
+            }
         default:{
             return {
                 ...state

@@ -56,6 +56,7 @@ export const getRealtimeConversations = ( user ) =>{
         const db = firestore();
         db.collection('conversations')
             .where('user_uid1','in',[user.uid_1,user.uid_2])
+            .orderBy('createdAt','desc')
             .onSnapshot((querySnapshot) => {
                 
                 console.log('what with querySnapshot value::', querySnapshot);
@@ -78,7 +79,7 @@ export const getRealtimeConversations = ( user ) =>{
                 }else{
                     dispatch({
                         type: `${userConstants.GET_REALTIME_MESSAGE}_FAILURE`,
-                        payload: []
+                        payload: { conversations }
                     });
                 }
                 console.log('Conversation from getConversation', conversations);
