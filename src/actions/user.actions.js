@@ -30,3 +30,58 @@ export const getRealTimeUsers = ( uid ) =>{
         return unsubscribe;
     }
 }
+
+export const updateMessage = (message) =>{
+
+    return async dispatch=>{
+        const db = firestore();
+        db.collection('conversations')
+            .add({
+                ...message,
+                isView:false,
+                createdAt: new Date()
+            })
+            .then((data)=>{
+                console.log('UpdateMsg Action', data);
+                
+            })
+            .catch(err=> console.log('Error', err))
+
+    }
+}
+
+export const getRealtimeConversations = ( user ) =>{
+    console.log('getRealtimeConversations-->', user)
+    return async dispatch =>{
+        const db = firestore();
+        db.collection('conversations')
+            .where('user_uid1','in',[user.uid_1,user.uid_2])
+            .onSnapshot((querySnapshot) => {
+                
+                console.log('what with querySnapshot value::', querySnapshot);
+                const conversations = [];
+                querySnapshot.forEach(( doc ) =>{
+                    if(
+                        (doc.data().user_uid1 == user.uid_1 && doc.data().user_uid2 == user.uid_2)
+                        || 
+                        (doc.data().user_uid1 == user.uid_2 && doc.data().user_uid2 == user.uid_1)
+                    ){
+                        conversations.push(doc.data())
+                    }
+                })
+
+                if( conversations.length > 0 ){
+                    dispatch({
+                        type: userConstants.GET_REALTIME_MESSAGE,
+                        payload: { conversations }
+                    });
+                }else{
+                    dispatch({
+                        type: `${userConstants.GET_REALTIME_MESSAGE}_FAILURE`,
+                        payload: []
+                    });
+                }
+                console.log('Conversation from getConversation', conversations);
+            });
+    }
+}
