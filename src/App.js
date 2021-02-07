@@ -18,7 +18,7 @@ function App() {
     if( !auth.authenticated ){
       dispatch(isLoggedInUser());
     }
-  }, [ dispatch ]);
+  },[auth.authenticated]);
   
   return (
     <div className="App">
