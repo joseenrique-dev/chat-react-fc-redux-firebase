@@ -62,6 +62,14 @@ const HomePage = (props) => {
             })
         }
     }
+
+    const onPress = ( e ) =>{
+        console.log('Pressss-->', e)
+        if(e.key === "Enter"){
+            submitMessage();
+        }
+        
+    }
   return(
     <Layout>
       <section className="container">
@@ -108,6 +116,7 @@ const HomePage = (props) => {
                         value={ message }
                         onChange={(e)=>setMessage(e.target.value)}
                         placeholder='Write a Message...'
+                        onKeyPress={onPress}
                     />
                     <button onClick={submitMessage}>Send</button>
                 </div> :
