@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getRealtimeConversations, getRealTimeUsers, updateMessage } from '../../actions';
 import Layout from '../../components/Layout';
@@ -19,21 +19,21 @@ const HomePage = (props) => {
     const [ message, setMessage ] = useState('');
     const [ userUid, setUserUid ] = useState(null);
 
-    let unsubscribe;
+    let unsubscribe = useRef(null);
 
     useEffect(() => {
-        unsubscribe = dispatch(getRealTimeUsers( auth.uid ))
-        .then(unsubscribe => unsubscribe)
+        unsubscribe.current = dispatch(getRealTimeUsers( auth.uid ))
+        .then((unsubscribeRealTime) => unsubscribeRealTime)
         .catch(err => {
             console.log('Error::', err);
         });  
-    }, []);
+    }, [auth, dispatch]);
 
     useEffect(() => {
         
         return () => {
             //cleanUp
-            unsubscribe
+            unsubscribe.current
             .then(f => f())
             .catch(err =>console.log('Err:',err));
         }
@@ -92,8 +92,8 @@ const HomePage = (props) => {
             <div className="messageSections">
             {
                 chatStarted ?
-                user.conversation.map(con =>
-                    <div style={{ textAlign: con.user_uid1 == auth.uid ? 'right' : 'left' }}>
+                user.conversations.map(con =>
+                    <div style={{ textAlign: con.user_uid1 === auth.uid ? 'right' : 'left' }}>
                         <p className="messageStyle" >{con.message}</p>
                     </div>
                 )

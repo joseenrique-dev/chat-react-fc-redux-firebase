@@ -14,7 +14,7 @@ export const getRealTimeUsers = ( uid ) =>{
         .onSnapshot((querySnapshot) => {
             const users = [];
             querySnapshot.forEach(function(doc) {
-                if(doc.data().uid != uid){
+                if(doc.data().uid !== uid){
                     users.push(doc.data());
                 }
             });
@@ -56,16 +56,16 @@ export const getRealtimeConversations = ( user ) =>{
         const db = firestore();
         db.collection('conversations')
             .where('user_uid1','in',[user.uid_1,user.uid_2])
-            .orderBy('createdAt','desc')
+            .orderBy('createdAt','asc')
             .onSnapshot((querySnapshot) => {
                 
                 console.log('what with querySnapshot value::', querySnapshot);
                 const conversations = [];
                 querySnapshot.forEach(( doc ) =>{
                     if(
-                        (doc.data().user_uid1 == user.uid_1 && doc.data().user_uid2 == user.uid_2)
+                        (doc.data().user_uid1 === user.uid_1 && doc.data().user_uid2 === user.uid_2)
                         || 
-                        (doc.data().user_uid1 == user.uid_2 && doc.data().user_uid2 == user.uid_1)
+                        (doc.data().user_uid1 === user.uid_2 && doc.data().user_uid2 === user.uid_1)
                     ){
                         conversations.push(doc.data())
                     }

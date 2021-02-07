@@ -20,16 +20,16 @@ const LoginPage = (props) => {
   
   useEffect(() => {
     dispatch(isLoggedInUser())
-  }, [])
+  }, [dispatch])
   const userLogin = e =>{
     e.preventDefault();
 
     // validations
-    if(email == "") {
+    if(email === "") {
       console.log('Empty email');
       return
     }
-    if(password == "") {
+    if(password === "") {
       console.log('Empty password');
       return
     }

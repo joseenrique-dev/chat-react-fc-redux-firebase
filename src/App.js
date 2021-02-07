@@ -1,13 +1,13 @@
+import React,{ useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import HomePage from './containers/HomePage';
 import LoginPage from './containers/LoginPage';
 import RegisterPage from './containers/RegisterPage';
 import PrivateRoute from './components/PrivateRoute';
 
-import './App.css';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { isLoggedInUser } from './actions';
+import './App.css';
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
     if( !auth.authenticated ){
       dispatch(isLoggedInUser());
     }
-  }, [])
+  }, [auth, dispatch]);
   
   return (
     <div className="App">

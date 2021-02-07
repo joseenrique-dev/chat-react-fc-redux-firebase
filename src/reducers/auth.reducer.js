@@ -9,7 +9,7 @@ const initialState = {
     error:null
 }
 
-export default (state = initialState, action) =>{
+const authReducer =  (state = initialState, action) =>{
     console.log('REDUCER-->', action);
 
     switch (action.type) {
@@ -18,7 +18,7 @@ export default (state = initialState, action) =>{
             return {
                 ...state,
                 authenticating: true
-            };
+            }
         case `${authConstants.USER_LOGIN}_SUCCESS`:
             
             return {
@@ -26,7 +26,7 @@ export default (state = initialState, action) =>{
                 ...action.payload.user,
                 authenticating: false,
                 authenticated:true
-            };
+            }
         case `${authConstants.USER_LOGIN}_FAILURE`:
             return {
                 ...state,
@@ -44,7 +44,7 @@ export default (state = initialState, action) =>{
             
             return {
                 ...initialState
-            };
+            }
         case `${authConstants.USER_LOGOUT}_FAILURE`:
             return {
                 ...state,
@@ -55,3 +55,5 @@ export default (state = initialState, action) =>{
         }
     }
 }
+
+export default authReducer;

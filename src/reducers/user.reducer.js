@@ -5,7 +5,7 @@ const initialState = {
     conversations: []
 }
 
-export default (state = initialState, action) =>{
+const userReducer =  (state = initialState, action) =>{
     
     console.log('Reducer users-->', {state, action})
     //GET_REALTIME_USERS_SUCCESS
@@ -25,9 +25,9 @@ export default (state = initialState, action) =>{
                 conversations: action.payload.conversations
             }
         default:{
-            return {
-                ...state
-            }
+            return state;
         }
     }
 }
+
+export default userReducer;
