@@ -17,7 +17,6 @@
     text-shadow: 0 0;
     text-align: center;
     padding-top: 6px;
-    font-family: cursive;
     font-variant: petite-caps;
 }
 
@@ -39,4 +38,14 @@ button{
     border: none;
     box-shadow: 0 2px 9px 0 rgb(0 0 0 / 50%);
     color: #ffffffe0;
+}
+
+@media screen and (max-width: 768px){
+    .loginContainer,
+    .registerContainer{
+        width: 83%;
+    }
+    .logo{
+        font-size: 15px;
+    }
 }

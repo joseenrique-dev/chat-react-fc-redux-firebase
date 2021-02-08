@@ -3,8 +3,8 @@ import Layout from '../../components/Layout';
 import Card from '../../components/UI/Card';
 import { signup } from '../../actions/index'
 import { useDispatch, useSelector } from 'react-redux';
-import '../LoginPage/style.css';
 import { Redirect } from 'react-router-dom';
+import '../LoginPage/style.css';
 
 
 /**
