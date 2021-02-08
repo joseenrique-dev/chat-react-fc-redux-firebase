@@ -18,8 +18,16 @@ const HomePage = (props) => {
     const [ chatUser, setChatUser ] = useState('');
     const [ message, setMessage ] = useState('');
     const [ userUid, setUserUid ] = useState(null);
-
     let unsubscribe = useRef(null);
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        if( messagesEndRef.current ){
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
+    useEffect(scrollToBottom);
 
     useEffect(() => {
         unsubscribe.current = dispatch(getRealTimeUsers( auth.uid ))
@@ -46,6 +54,7 @@ const HomePage = (props) => {
         
         dispatch(getRealtimeConversations({ uid_1: auth.uid, uid_2: user.uid }));
     }
+    
 
     const submitMessage = () =>{
         const msgObj = {
@@ -59,17 +68,19 @@ const HomePage = (props) => {
             dispatch( updateMessage(msgObj) )
             .then(() =>{
                 setMessage("");
+                
             })
         }
     }
-
+    
     const onPress = ( e ) =>{
-        console.log('Pressss-->', e)
+        
         if(e.key === "Enter"){
             submitMessage();
         }
-        
     }
+
+
   return(
     <Layout>
       <section className="container">
@@ -103,6 +114,7 @@ const HomePage = (props) => {
                 user.conversations.map(con =>
                     <div style={{ textAlign: con.user_uid1 === auth.uid ? 'right' : 'left' }}>
                         <p className="messageStyle" >{con.message}</p>
+                        <div ref={messagesEndRef} id="bb"/>
                     </div>
                 )
                  :
@@ -111,7 +123,7 @@ const HomePage = (props) => {
             </div>
             {
                 chatStarted ?
-                <div className="chatControls">
+                <div className="chatControls" >
                     <textarea 
                         value={ message }
                         onChange={(e)=>setMessage(e.target.value)}
