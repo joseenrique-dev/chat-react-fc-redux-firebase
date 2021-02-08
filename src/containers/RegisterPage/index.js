@@ -41,14 +41,23 @@ const RegisterPage = (props) => {
     <Layout>
       <div className="registerContainer">
         <Card>
+          <h2 className="title-auth">Create your Account</h2>
           <form onSubmit={ onRegister } >
-          <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)}/>          
-          <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)}/>          
-          <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>          
-          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>          
-          <div>
-            <button>Register !!</button>
-          </div>
+            <div className="inp">
+              <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)}/>          
+            </div>
+            <div className="inp">
+              <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)}/>          
+            </div>
+            <div className="inp">
+              <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)}/>
+            </div>
+            <div className="inp">
+              <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)}/>
+            </div>
+            <div className="inp">
+              <button>Register !!</button>
+            </div>
           </form>
         </Card>
       </div>

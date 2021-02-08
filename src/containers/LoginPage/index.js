@@ -45,12 +45,18 @@ const LoginPage = (props) => {
   return(
     <Layout>
       <div className="loginContainer">
+        
         <Card>
+        <h2 className="title-auth">Login to your Account</h2>
           <form onSubmit={userLogin} autoComplete="on">
-            <input type="text" value={email} onChange={e => setEmail(e.target.value)}/>          
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>          
-            <div>
-              <button type="submit">Login !!</button>
+            <div className="inp">
+              <input type="text" placeholder="email@example.org" value={email} onChange={e => setEmail(e.target.value)}/>          
+            </div>
+            <div className="inp">
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+            </div>
+            <div className="inp">
+              <button type="submit">Login!!</button>
             </div>
           </form>
         </Card>
