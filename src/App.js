@@ -20,6 +20,7 @@ function App() {
     }
   },[auth.authenticated, dispatch]);
   
+  
   return (
     <div className="App">
       <BrowserRouter>
